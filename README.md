@@ -1,6 +1,8 @@
 # fish-config
 
-# Auto run `nvm use` in folders with .nvmrc needs nvm plugin or other executable
+## Auto run `nvm use` in folders with .nvmrc needs nvm plugin or other executable
+
+```fish
 function __check_nvm --on-variable PWD --description 'Do nvm stuff'
     if test -f .nvmrc
         set node_version (nvm current)
@@ -8,9 +10,7 @@ function __check_nvm --on-variable PWD --description 'Do nvm stuff'
             # Set version to None to ensure the string match will fail if node_version wasn't set
             set node_version None
         end
-
         set nvmrc_node_version (nvm list | grep (cat .nvmrc))
-
         if set -q $nvmrc_node_version
             nvm install
         else if string match -q -- "*$node_version*" $nvmrc_node_version
@@ -22,3 +22,4 @@ function __check_nvm --on-variable PWD --description 'Do nvm stuff'
 end
 
 __check_nvm
+```
